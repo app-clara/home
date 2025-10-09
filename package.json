@@ -85,6 +85,7 @@
   "deploy": "gh-pages -d dist",
   "dev": "vite",
   "build": "vite build"
-  }
+  },
+  "homepage": "https://app-clara.github.io/home/"
 
 }
