@@ -26,7 +26,7 @@ import logoClara from "@/assets/logo-clara.png";
 const Index = () => {
   const [email, setEmail] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) {
       toast.error("Por favor, insira seu email");
