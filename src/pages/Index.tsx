@@ -34,6 +34,17 @@ const Index = () => {
     }
     // Here you would integrate with your backend
     toast.success("Obrigado! Entraremos em contato em breve.");
+    const response = await fetch('https://getleadsinfo-504763904926.southamerica-east1.run.app', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+    });
+  
+    if (response.ok) {
+      alert('Email saved successfully!');
+    } else {
+      alert('Error saving email');
+    }
     setEmail("");
   };
 
