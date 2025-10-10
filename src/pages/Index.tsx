@@ -46,7 +46,7 @@ const Index = () => {
             <img 
               src={logoClara} 
               alt="Clara - Assistente Digital" 
-              className="h-16 sm:h-24 md:h-32 w-auto"
+              className="h-32 sm:h-24 md:h-32 w-auto"
             />
             <Button 
               variant="hero" 
