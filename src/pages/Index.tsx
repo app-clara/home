@@ -374,7 +374,7 @@ const Index = () => {
           </div>
           
           <div className="border-t mt-8 pt-8 text-center text-sm text-muted-foreground">
-            <p>© 2024 Clara. Todos os direitos reservados.</p>
+            <p>© 2025 Clara. Todos os direitos reservados.</p>
           </div>
         </div>
       </footer>
