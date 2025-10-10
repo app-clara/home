@@ -41,9 +41,9 @@ const Index = () => {
     });
   
     if (response.ok) {
-      alert('Email saved successfully!');
+      console.log("Email saved successfully!");
     } else {
-      alert('Error saving email');
+      console.log('Error saving email');
     }
     setEmail("");
   };
