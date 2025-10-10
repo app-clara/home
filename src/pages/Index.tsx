@@ -26,7 +26,7 @@ import logoClara from "@/assets/logo-clara.png";
 const Index = () => {
   const [email, setEmail] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) {
       toast.error("Por favor, insira seu email");
@@ -34,17 +34,6 @@ const Index = () => {
     }
     // Here you would integrate with your backend
     toast.success("Obrigado! Entraremos em contato em breve.");
-    const response = await fetch('https://getleadsinfo-504763904926.southamerica-east1.run.app/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email }),
-    });
-  
-    if (response.ok) {
-      alert('Email saved successfully!');
-    } else {
-      alert('Error saving email');
-    }
     setEmail("");
   };
 
@@ -52,16 +41,17 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       {/* Fixed Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex items-center justify-between">
+        <div className="container mx-auto px-4 py-3 sm:py-6">
+          <div className="flex items-center justify-between gap-2">
             <img 
               src={logoClara} 
               alt="Clara - Assistente Digital" 
-              className="h-32 w-auto"
+              className="h-16 sm:h-24 md:h-32 w-auto"
             />
             <Button 
               variant="hero" 
               size="lg"
+              className="text-xs sm:text-sm whitespace-nowrap px-3 sm:px-8"
               onClick={() => document.getElementById('cadastro')?.scrollIntoView({ behavior: 'smooth' })}
             >
               Começar agora
@@ -171,9 +161,12 @@ const Index = () => {
             <Button 
               variant="hero" 
               size="lg"
+              className="text-xs sm:text-sm md:text-base px-4 sm:px-8"
               onClick={() => document.getElementById('cadastro')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              Fale com a Clara e veja como ela pode ajudar seu negócio <ArrowRight className="ml-2" />
+              <span className="hidden sm:inline">Fale com a Clara e veja como ela pode ajudar seu negócio</span>
+              <span className="inline sm:hidden">Fale com a Clara</span>
+              <ArrowRight className="ml-2" />
             </Button>
           </div>
         </div>
