@@ -7,6 +7,13 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import { 
   MessageSquare, 
   Calendar, 
@@ -47,7 +54,7 @@ const Index = () => {
     }
     setEmail("");
   };
-
+  
   return (
     <div className="min-h-screen bg-background">
       {/* Fixed Header */}
@@ -57,7 +64,7 @@ const Index = () => {
             <img 
               src={logoClara} 
               alt="Clara - Assistente Digital" 
-              className="h-32 sm:h-24 md:h-32 w-auto"
+              className="h-16 sm:h-24 md:h-32 w-auto"
             />
             <Button 
               variant="hero" 
@@ -81,7 +88,7 @@ const Index = () => {
                 <span className="text-sm font-medium">Sua assistente digital por WhatsApp</span>
               </div>
               <h1 className="text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                Organize seus cliente com a Clara
+                Organize seus clientes com a Clara
               </h1>
               <p className="text-xl text-muted-foreground mb-8">
                 A Clara é sua secretária digital no WhatsApp: agenda compromissos, envia lembretes e organiza suas cobranças — Simples, rápida e eficiente.
@@ -94,7 +101,11 @@ const Index = () => {
                 >
                   Começar agora <ArrowRight className="ml-2" />
                 </Button>
-                <Button variant="outline" size="lg">
+                <Button 
+                  variant="outline" 
+                  size="lg"
+                  onClick={() => document.getElementById('funcionalidades')?.scrollIntoView({ behavior: 'smooth' })}
+                >
                   Ver como funciona
                 </Button>
               </div>
@@ -111,7 +122,7 @@ const Index = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-24 bg-[#E8F4F2]">
+      <section id="funcionalidades" className="py-24 bg-[#E8F4F2]">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4 text-[#4A9B8E]">Funcionalidades da Clara</h2>
@@ -120,7 +131,8 @@ const Index = () => {
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Desktop Grid */}
+          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
                 icon: Calendar,
@@ -166,6 +178,60 @@ const Index = () => {
                 </CardContent>
               </Card>
             ))}
+          </div>
+
+          {/* Mobile Carousel */}
+          <div className="md:hidden">
+            <Carousel className="w-full">
+              <CarouselContent className="-ml-4">
+                {[
+                  {
+                    icon: Calendar,
+                    title: "Agendamento automático",
+                    description: "A Clara marca seus atendimentos direto no WhatsApp — sem precisar abrir agenda ou aplicativos. Ela confirma a disponibilidade, envia as opções e atualiza seu calendário automaticamente."
+                  },
+                  {
+                    icon: Bell,
+                    title: "Confirmação e lembrete de presença",
+                    description: "Antes de cada atendimento, a Clara envia mensagens automáticas para confirmar a presença do cliente e lembrá-lo do horário."
+                  },
+                  {
+                    icon: Users,
+                    title: "Reativação de clientes",
+                    description: "A Clara identifica quem não agenda há algum tempo e envia mensagens personalizadas para reaproximar o cliente."
+                  },
+                  {
+                    icon: Banknote,
+                    title: "Cobrança simples por Pix ou boleto",
+                    description: "A Clara envia automaticamente sua chave Pix ou boleto de cobrança, acompanha se o pagamento foi feito e avisa quando está tudo certo."
+                  },
+                  {
+                    icon: Star,
+                    title: "Avaliação e indicação",
+                    description: "Após o atendimento, a Clara pergunta como foi a experiência. Se o cliente estiver satisfeito, ela incentiva a deixar um review no Google ou indicar novos clientes."
+                  },
+                  {
+                    icon: Megaphone,
+                    title: "Campanhas e promoções em massa",
+                    description: "Quer divulgar uma promoção ou novidade? A Clara envia mensagens personalizadas para todos os seus clientes, com filtros por frequência ou tipo de serviço."
+                  }
+                ].map((feature, index) => (
+                  <CarouselItem key={index} className="pl-4 basis-[85%]">
+                    <Card className="border-0 shadow-card bg-gradient-to-br from-card to-secondary/20 h-full">
+                      <CardContent className="p-6">
+                        <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center mb-4">
+                          <feature.icon className="w-6 h-6 text-primary-foreground" />
+                        </div>
+                        <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+                        <p className="text-muted-foreground">{feature.description}</p>
+                      </CardContent>
+                    </Card>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="hidden" />
+              <CarouselNext className="hidden" />
+            </Carousel>
           </div>
           
           <div className="text-center mt-12">
