@@ -59,12 +59,12 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       {/* Fixed Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
-        <div className="container mx-auto px-4 py-3 sm:py-6">
+        <div className="container mx-auto px-4 py-3">
           <div className="flex items-center justify-between gap-2">
             <img 
               src={logoClara} 
               alt="Clara - Assistente Digital" 
-              className="h-32 sm:h-24 md:h-32 w-auto"
+              className="h-24 w-auto"
             />
             <Button 
               variant="hero" 
@@ -449,4 +449,5 @@ const Index = () => {
 };
 
 export default Index;
+
 
