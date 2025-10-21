@@ -23,15 +23,73 @@ import {
   Sparkles,
   Banknote,
   Star,
-  Megaphone
+  Megaphone,
+  Volume2,
+  VolumeX
 } from "lucide-react";
-import { useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import { toast } from "sonner";
 import heroImage from "@/assets/hero-clara.jpg";
+import videoLanding from "@/assets/video_landing.mp4";
 import logoClara from "@/assets/logo-clara.png";
 import { RegistrationForm } from "@/components/RegistrationForm";
 
 const Index = () => {
+  
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const isMobile = window.innerWidth < 768;
+  const [hasPlayed, setHasPlayed] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (isMobile) {
+      // Mobile: Play when scrolled into viewport
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && !hasPlayed) {
+              video.play();
+              setHasPlayed(true);
+              setIsPlaying(true);
+            }
+          });
+        },
+        { threshold: 0.5 }
+      );
+
+      observer.observe(video);
+      return () => observer.disconnect();
+    }
+  }, [isMobile, hasPlayed]);
+
+  const handleMouseEnter = () => {
+    if (!isMobile && videoRef.current && !hasPlayed) {
+      videoRef.current.play();
+      setHasPlayed(true);
+      setIsPlaying(true);
+    }
+  };
+
+  const handlePlayClick = () => {
+    if (videoRef.current) {
+      videoRef.current.play();
+      setHasPlayed(true);
+      setIsPlaying(true);
+    }
+  };
+
+  const handleSoundToggle = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (videoRef.current) {
+      videoRef.current.muted = !isMuted;
+      setIsMuted(!isMuted);
+    }
+  };
+  
   return (
     <div className="min-h-screen bg-background">
       {/* Fixed Header */}
@@ -56,7 +114,7 @@ const Index = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary/10 via-background to-accent/10 pt-48 pb-32">
+      <section className="relative overflow-hidden bg-gradient-to-br from-primary/10 via-background to-accent/10 pt-32 pb-32">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="animate-fade-in">
@@ -65,7 +123,7 @@ const Index = () => {
                 <span className="text-sm font-medium">Sua assistente digital por WhatsApp</span>
               </div>
               <h1 className="text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                Organize seus clientes com a Clara
+                Organize seus cliente com a Clara
               </h1>
               <p className="text-xl text-muted-foreground mb-8">
                 A Clara é sua secretária digital no WhatsApp: agenda compromissos, envia lembretes e organiza suas cobranças — Simples, rápida e eficiente.
@@ -87,12 +145,42 @@ const Index = () => {
                 </Button>
               </div>
             </div>
-            <div className="animate-fade-in-delayed">
-              <img 
-                src={heroImage} 
-                alt="Clara - Assistente Digital por WhatsApp" 
-                className="rounded-2xl shadow-elegant w-full"
-              />
+            <div 
+              className="animate-fade-in-delayed relative overflow-hidden rounded-2xl shadow-elegant shadow-2xl group cursor-pointer"
+              style={{ boxShadow: '0 20px 60px -15px hsl(186 28% 50% / 0.4), 0 10px 30px -10px hsl(186 28% 50% / 0.3)' }}
+              onMouseEnter={handleMouseEnter}
+              onClick={handlePlayClick}
+            >
+              <video
+                ref={videoRef}
+                muted={isMuted}
+                loop
+                playsInline
+                className="w-full h-full object-cover rounded-2xl"
+              >
+                <source src={videoLanding} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              {!isPlaying && (
+                <div className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-[2px] rounded-2xl transition-opacity">
+                  <div className="w-20 h-20 rounded-full bg-white/90 flex items-center justify-center shadow-lg hover:bg-white hover:scale-110 transition-all">
+                    <div className="w-0 h-0 border-t-[12px] border-t-transparent border-l-[20px] border-l-primary border-b-[12px] border-b-transparent ml-1"></div>
+                  </div>
+                </div>
+              )}
+              {isPlaying && (
+                <button
+                  onClick={handleSoundToggle}
+                  className="absolute bottom-4 right-4 w-10 h-10 rounded-full bg-black/50 hover:bg-black/70 flex items-center justify-center transition-all backdrop-blur-sm"
+                  aria-label={isMuted ? "Unmute video" : "Mute video"}
+                >
+                  {isMuted ? (
+                    <VolumeX className="w-5 h-5 text-white" />
+                  ) : (
+                    <Volume2 className="w-5 h-5 text-white" />
+                  )}
+                </button>
+              )}
             </div>
           </div>
         </div>
@@ -411,6 +499,7 @@ const Index = () => {
 };
 
 export default Index;
+
 
 
 
