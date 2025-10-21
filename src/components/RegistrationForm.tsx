@@ -72,9 +72,12 @@ export const RegistrationForm = () => {
       updated_at: new Date().toISOString(),
     };
 
-    console.log("Registration data:", registrationData);
+    // Serialize to JSON
+    const jsonData = JSON.stringify(registrationData, null, 2);
+    console.log("Registration data (JSON):", jsonData);
     
     // Here you would integrate with your backend
+    // Example: send jsonData to your API endpoint
     toast.success("Obrigado! Entraremos em contato em breve.");
     form.reset();
   };
