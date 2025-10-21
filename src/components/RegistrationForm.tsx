@@ -61,7 +61,7 @@ export const RegistrationForm = () => {
     },
   });
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = async (data: FormData) => {
     // Generate UUID and timestamps
     const registrationData = {
       id: crypto.randomUUID(),
