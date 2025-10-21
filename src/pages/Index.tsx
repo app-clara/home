@@ -378,22 +378,7 @@ const Index = () => {
               Cadastre-se agora e seja um dos primeiros a experimentar a Clara
             </p>
             
-            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-              <Input
-                type="email"
-                placeholder="Seu melhor email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="flex-1"
-              />
-              <Button type="submit" variant="hero" size="lg">
-                Começar grátis
-              </Button>
-            </form>
-            
-            <p className="text-sm text-muted-foreground mt-4">
-              Sem compromisso. Cancele quando quiser.
-            </p>
+            <RegistrationForm />
           </div>
         </div>
       </section>
@@ -449,5 +434,6 @@ const Index = () => {
 };
 
 export default Index;
+
 
 
