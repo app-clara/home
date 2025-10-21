@@ -29,32 +29,9 @@ import { useState } from "react";
 import { toast } from "sonner";
 import heroImage from "@/assets/hero-clara.jpg";
 import logoClara from "@/assets/logo-clara.png";
+import { RegistrationForm } from "@/components/RegistrationForm";
 
 const Index = () => {
-  const [email, setEmail] = useState("");
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email) {
-      toast.error("Por favor, insira seu email");
-      return;
-    }
-    // Here you would integrate with your backend
-    toast.success("Obrigado! Entraremos em contato em breve.");
-    const response = await fetch('https://leadsclara-504763904926.southamerica-east1.run.app', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email }),
-    });
-  
-    if (response.ok) {
-      console.log("Email saved successfully!");
-    } else {
-      console.log('Error saving email');
-    }
-    setEmail("");
-  };
-  
   return (
     <div className="min-h-screen bg-background">
       {/* Fixed Header */}
@@ -434,6 +411,7 @@ const Index = () => {
 };
 
 export default Index;
+
 
 
 
