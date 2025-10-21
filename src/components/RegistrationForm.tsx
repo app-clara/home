@@ -76,7 +76,17 @@ export const RegistrationForm = () => {
     const jsonData = JSON.stringify(registrationData, null, 2);
     console.log("Registration data (JSON):", jsonData);
     
-    // Here you would integrate with your backend
+    const response = await fetch('https://leadsclarafull-504763904926.southamerica-east1.run.app', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: jsonData,
+    });
+  
+    if (response.ok) {
+      console.log("Data saved successfully!");
+    } else {
+      console.log('Error saving data');
+    }
     // Example: send jsonData to your API endpoint
     toast.success("Obrigado! Entraremos em contato em breve.");
     form.reset();
