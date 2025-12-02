@@ -131,7 +131,7 @@ export const RegistrationForm = () => {
               <FormItem>
                 <FormLabel>Telefone (WhatsApp) *</FormLabel>
                 <FormControl>
-                  <Input placeholder="5511999999999" {...field} />
+                  <Input placeholder="11999999999" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
