@@ -131,7 +131,7 @@ export const RegistrationForm = () => {
               <FormItem>
                 <FormLabel>Telefone (WhatsApp) *</FormLabel>
                 <FormControl>
-                  <Input placeholder="+5511999999999" {...field} />
+                  <Input placeholder="5511999999999" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -143,7 +143,7 @@ export const RegistrationForm = () => {
             name="business_name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Nome do negócio *</FormLabel>
+                <FormLabel>Nome da empresa *</FormLabel>
                 <FormControl>
                   <Input placeholder="Nome da sua empresa" {...field} />
                 </FormControl>
@@ -186,10 +186,10 @@ export const RegistrationForm = () => {
           name="business_description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Descrição do negócio</FormLabel>
+              <FormLabel>Descrição da empresa</FormLabel>
               <FormControl>
                 <Textarea 
-                  placeholder="Conte um pouco sobre o seu negócio..."
+                  placeholder="Conte um pouco sobre o seu negócio, Isto nos ajuda a fornecer uma experiência personalizada..."
                   className="resize-none"
                   rows={4}
                   {...field}
