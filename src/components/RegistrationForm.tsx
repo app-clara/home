@@ -25,7 +25,8 @@ const formSchema = z.object({
     .max(255, { message: "Email deve ter no máximo 255 caracteres" }),
   phone_number: z.string()
     .trim()
-    .min(14, { message: "Telefone é obrigatório, com 14 caracteres"})
+    .min(11, { message: "Telefone é obrigatório, com 11 caracteres"})
+    .max(11, { message: "Telefone é obrigatório, com 11 caracteres"})
     .regex(/^\+?[1-9]\d{1,14}$/, { message: "Número de telefone inválido (use formato E.164, ex: 11999999999)" }),
   business_name: z.string()
     .trim()
