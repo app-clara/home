@@ -14,6 +14,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { toast } from "sonner";
 
+const commonTimes = [
+  { value: "15", label: "15 minutos" },
+  { value: "30", label: "30 minutos" },
+  { value: "45", label: "45 minutos" },
+  { value: "60", label: "1 hora" },
+  { value: "90", label: "1 hora e 30 minutos" },
+  { value: "120", label: "2 horas" },
+];
 const formSchema = z.object({
   full_name: z.string()
     .trim()
@@ -44,6 +52,8 @@ const formSchema = z.object({
     .trim()
     .min(1, { message: "Número de funcionários é obrigatório" })
     .regex(/^\d+$/, { message: "Digite apenas números" }),
+    attendance_time: z.string()
+    .min(1, { message: "Tempo de atendimento é obrigatório" }),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -59,6 +69,7 @@ export const RegistrationForm = () => {
       business_sector: "",
       business_description: "",
       number_of_employees: "",
+      attendance_time: "",
     },
   });
 
@@ -176,6 +187,31 @@ export const RegistrationForm = () => {
                 <FormControl>
                   <Input type="text" placeholder="Ex: 5" {...field} />
                 </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="attendance_time"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Tempo de atendimento *</FormLabel>
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Selecione o tempo" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {commonTimes.map((time) => (
+                      <SelectItem key={time.value} value={time.value}>
+                        {time.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
                 <FormMessage />
               </FormItem>
             )}
