@@ -437,7 +437,7 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-4xl font-bold mb-4">
-              Pronto para ter sua assistente digital?
+              Pronto para ter sua secretária digital?
             </h2>
             <p className="text-xl text-muted-foreground mb-8">
               Cadastre-se agora e seja um dos primeiros a experimentar a Clara
@@ -499,6 +499,7 @@ const Index = () => {
 };
 
 export default Index;
+
 
 
 
