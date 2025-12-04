@@ -123,7 +123,7 @@ const Index = () => {
                 <span className="text-sm font-medium">Sua assistente digital por WhatsApp</span>
               </div>
               <h1 className="text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                Organize seus cliente com a Clara
+                Organize seus clientes com a Clara
               </h1>
               <p className="text-xl text-muted-foreground mb-8">
                 A Clara é sua secretária digital no WhatsApp: agenda compromissos, envia lembretes e organiza suas cobranças — Simples, rápida e eficiente.
@@ -499,6 +499,7 @@ const Index = () => {
 };
 
 export default Index;
+
 
 
 
