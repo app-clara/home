@@ -315,7 +315,7 @@ const Index = () => {
       </section>
 
 
-      {/* Testimonials Section */}
+       {/* Testimonials Section */}
       <section className="py-24 bg-secondary/30">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
@@ -325,7 +325,52 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {/* Mobile Carousel */}
+          <div className="md:hidden">
+            <Carousel className="w-full max-w-sm mx-auto">
+              <CarouselContent>
+                {[
+                  {
+                    name: "Mariana Costa",
+                    role: "Psicóloga",
+                    content: "Antes da Clara eu perdia muito tempo confirmando sessões e cobrando atrasados. Agora tudo acontece sozinho — meus pacientes recebem lembretes e até feedbacks automáticos. Ganhei tempo e tranquilidade."
+                  },
+                  {
+                    name: "Rafael Oliveira",
+                    role: "Fisioterapeuta",
+                    content: "A Clara virou parte da minha rotina. Ela confirma os atendimentos, avisa quando alguém cancela e até ajuda a reativar pacientes antigos. É como ter uma secretária de verdade, mas no WhatsApp."
+                  },
+                  {
+                    name: "Juliana Mendes",
+                    role: "Personal Trainer",
+                    content: "Eu vivia esquecendo de cobrar alunos ou mandar lembrete das aulas. A Clara faz tudo isso pra mim. Meu dia ficou muito mais leve e consigo focar nos treinos e não nas mensagens."
+                  }
+                ].map((testimonial, index) => (
+                  <CarouselItem key={index}>
+                    <Card className="border-0 shadow-card bg-card">
+                      <CardContent className="p-6">
+                        <div className="flex items-center gap-1 mb-4 text-accent">
+                          {[...Array(5)].map((_, i) => (
+                            <Sparkles key={i} className="w-4 h-4 fill-current" />
+                          ))}
+                        </div>
+                        <p className="text-muted-foreground mb-4">"{testimonial.content}"</p>
+                        <div>
+                          <p className="font-semibold">{testimonial.name}</p>
+                          <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="left-0" />
+              <CarouselNext className="right-0" />
+            </Carousel>
+          </div>
+
+          {/* Desktop Grid */}
+          <div className="hidden md:grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {[
               {
                 name: "Mariana Costa",
@@ -499,6 +544,7 @@ const Index = () => {
 };
 
 export default Index;
+
 
 
 
