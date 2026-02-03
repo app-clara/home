@@ -33,6 +33,7 @@ import heroImage from "@/assets/hero-clara.jpg";
 import videoLanding from "@/assets/video_landing.mp4";
 import logoClara from "@/assets/logo-clara.png";
 import { RegistrationForm } from "@/components/RegistrationForm";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   
