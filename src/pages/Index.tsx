@@ -33,6 +33,7 @@ import heroImage from "@/assets/hero-clara.jpg";
 import videoLanding from "@/assets/video_landing.mp4";
 import logoClara from "@/assets/logo-clara.png";
 import { RegistrationForm } from "@/components/RegistrationForm";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   
@@ -101,14 +102,25 @@ const Index = () => {
               alt="Clara - Assistente Digital" 
               className="h-24 w-auto"
             />
-            <Button 
-              variant="hero" 
-              size="lg"
-              className="text-xs sm:text-sm whitespace-nowrap px-3 sm:px-8"
-              onClick={() => document.getElementById('cadastro')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              Começar agora
-            </Button>
+            <div className="flex items-center gap-2 sm:gap-4">
+              <Link to="/editar-preferencias">
+                <Button 
+                  variant="outline" 
+                  size="lg"
+                  className="text-xs sm:text-sm whitespace-nowrap px-3 sm:px-6"
+                >
+                  Editar preferências
+                </Button>
+              </Link>
+              <Button 
+                variant="hero" 
+                size="lg"
+                className="text-xs sm:text-sm whitespace-nowrap px-3 sm:px-8"
+                onClick={() => document.getElementById('cadastro')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                Começar agora
+              </Button>
+            </div>
           </div>
         </div>
       </header>
@@ -494,6 +506,7 @@ const Index = () => {
       </section>
 
       {/* Footer */}
+      {/* Footer */}
       <footer className="py-12 border-t bg-card">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-8">
@@ -511,7 +524,7 @@ const Index = () => {
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li><a href="#" className="hover:text-primary transition-colors">Funcionalidades</a></li>
                 <li><a href="#" className="hover:text-primary transition-colors">Preços</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Segurança</a></li>
+                <li><Link to="/editar-preferencias" className="hover:text-primary transition-colors">Editar preferências</Link></li>
               </ul>
             </div>
             
@@ -535,7 +548,7 @@ const Index = () => {
           </div>
           
           <div className="border-t mt-8 pt-8 text-center text-sm text-muted-foreground">
-            <p>© 2025 Clara. Todos os direitos reservados.</p>
+            <p>© 2026 Clara. Todos os direitos reservados.</p>
           </div>
         </div>
       </footer>
