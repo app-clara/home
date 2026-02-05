@@ -65,7 +65,7 @@ const editFormSchema = z.object({
   phone_number: z.string()
     .trim()
     .min(1, { message: "Telefone é obrigatório" })
-    .regex(/^\d{11}$/, { message: "Telefone deve ter exatamente 11 dígitos" }),
+    .regex(/^\d{13}$/, { message: "Telefone deve ter exatamente 13 dígitos" }),
   business_name: z.string()
     .trim()
     .min(2, { message: "Nome do negócio deve ter pelo menos 2 caracteres" })
