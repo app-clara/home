@@ -97,6 +97,7 @@ const EditPreferences = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [userEmail, setUserEmail] = useState("");
+  const [userToken, setUserToken] = useState("");
 
   const emailForm = useForm<EmailData>({
     resolver: zodResolver(emailSchema),
@@ -175,6 +176,7 @@ const EditPreferences = () => {
         });
         toast.success("Token verificado com sucesso!");
         // Redirect to edit form after populating data
+        setUserToken(data.token);
         setStep(2);
       } else {
         toast.error("Token inválido. Tente novamente.");
@@ -192,6 +194,8 @@ const EditPreferences = () => {
     try {
       const updateData = {
         ...data,
+        email_verify: userEmail,
+        token: userToken,
         number_of_employees: data.number_of_employees ? parseInt(data.number_of_employees) : null,
       };
 
