@@ -128,7 +128,7 @@ const EditPreferences = () => {
     setIsLoading(true);
     try {
       // Call endpoint to send reset token
-      const response = await fetch('https://your-endpoint.com/send-token', {
+      const response = await fetch('https://southamerica-east1-youtube-api-atomus.cloudfunctions.net/claraleads-editpreferences/send_reset_password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: data.email }),
@@ -153,7 +153,7 @@ const EditPreferences = () => {
     setIsLoading(true);
     try {
       // Call endpoint to verify token
-      const response = await fetch('https://your-endpoint.com/verify-token', {
+      const response = await fetch('https://southamerica-east1-youtube-api-atomus.cloudfunctions.net/claraleads-editpreferences/verify_token', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: userEmail, token: data.token }),
@@ -192,13 +192,12 @@ const EditPreferences = () => {
       const updateData = {
         ...data,
         number_of_employees: data.number_of_employees ? parseInt(data.number_of_employees) : null,
-        updated_at: new Date().toISOString(),
       };
 
       const jsonData = JSON.stringify(updateData, null, 2);
       console.log("Update data (JSON):", jsonData);
 
-      const response = await fetch('https://your-endpoint.com/update-preferences', {
+      const response = await fetch('https://southamerica-east1-youtube-api-atomus.cloudfunctions.net/claraleads-editpreferences/submit_form', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: jsonData,
