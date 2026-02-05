@@ -137,7 +137,6 @@ const EditPreferences = () => {
       if (response.ok) {
         setUserEmail(data.email);
         toast.success("Token enviado para seu email!");
-        setStep(2);
       } else {
         toast.error("Erro ao enviar token. Tente novamente.");
       }
@@ -175,6 +174,8 @@ const EditPreferences = () => {
           integrate_google_calendar: userData.integrate_google_calendar || true,
         });
         toast.success("Token verificado com sucesso!");
+        // Redirect to edit form after populating data
+        setStep(2);
       } else {
         toast.error("Token inválido. Tente novamente.");
       }
