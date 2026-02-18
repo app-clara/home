@@ -22,7 +22,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { toast } from "sonner";
 import { Loader2, CheckCircle } from "lucide-react";
-const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/test_cNi14p8iHcxE63l8hi73G00";
+const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/test_bJe28t7eD69g63l8hi73G01";
 const commonTimes = [
   { value: "15", label: "15 minutos" },
   { value: "30", label: "30 minutos" },
