@@ -1,0 +1,387 @@
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { 
+  MessageSquare, 
+  Calendar, 
+  Bell, 
+  Users,
+  ArrowRight,
+  Sparkles,
+  Banknote,
+  Star,
+  Megaphone,
+  Volume2,
+  VolumeX,
+  Check
+} from "lucide-react";
+import videoLanding from "@/assets/video_landing.mp4";
+import logoClara from "@/assets/logo-clara.png";
+import { RegistrationFormPaid } from "@/components/RegistrationFormPaid";
+import { useRef, useEffect, useState } from "react";
+const IndexPaid = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const isMobile = window.innerWidth < 768;
+  const [hasPlayed, setHasPlayed] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (isMobile) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && !hasPlayed) {
+              video.play();
+              setHasPlayed(true);
+              setIsPlaying(true);
+            }
+          });
+        },
+        { threshold: 0.5 }
+      );
+      observer.observe(video);
+      return () => observer.disconnect();
+    }
+  }, [isMobile, hasPlayed]);
+  const handleMouseEnter = () => {
+    if (!isMobile && videoRef.current && !hasPlayed) {
+      videoRef.current.play();
+      setHasPlayed(true);
+      setIsPlaying(true);
+    }
+  };
+  const handlePlayClick = () => {
+    if (videoRef.current) {
+      videoRef.current.play();
+      setHasPlayed(true);
+      setIsPlaying(true);
+    }
+  };
+  const handleSoundToggle = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (videoRef.current) {
+      videoRef.current.muted = !isMuted;
+      setIsMuted(!isMuted);
+    }
+  };
+  const features = [
+    { icon: Calendar, title: "Agendamento automático", description: "A Clara marca seus atendimentos direto no WhatsApp — sem precisar abrir agenda ou aplicativos." },
+    { icon: Bell, title: "Confirmação e lembrete de presença", description: "Antes de cada atendimento, a Clara envia mensagens automáticas para confirmar a presença do cliente." },
+    { icon: Users, title: "Reativação de clientes", description: "A Clara identifica quem não agenda há algum tempo e envia mensagens personalizadas para reaproximar o cliente." },
+    { icon: Banknote, title: "Cobrança simples por Pix ou boleto", description: "A Clara envia automaticamente sua chave Pix ou boleto de cobrança e acompanha o pagamento." },
+    { icon: Star, title: "Avaliação e indicação", description: "Após o atendimento, a Clara pergunta como foi a experiência e incentiva reviews e indicações." },
+    { icon: Megaphone, title: "Campanhas e promoções em massa", description: "Envie mensagens personalizadas para todos os seus clientes com filtros por frequência ou tipo de serviço." },
+  ];
+  const testimonials = [
+    { name: "Mariana Costa", role: "Psicóloga", content: "Antes da Clara eu perdia muito tempo confirmando sessões e cobrando atrasados. Agora tudo acontece sozinho — ganhei tempo e tranquilidade." },
+    { name: "Rafael Oliveira", role: "Fisioterapeuta", content: "A Clara virou parte da minha rotina. Ela confirma os atendimentos, avisa quando alguém cancela e até ajuda a reativar pacientes antigos." },
+    { name: "Juliana Mendes", role: "Personal Trainer", content: "Eu vivia esquecendo de cobrar alunos ou mandar lembrete das aulas. A Clara faz tudo isso pra mim. Meu dia ficou muito mais leve." },
+  ];
+  const planBenefits = [
+    "Agendamento automático ilimitado",
+    "Lembretes e confirmação de presença",
+    "Cobrança automática por Pix",
+    "Reativação de clientes inativos",
+    "Campanhas e promoções em massa",
+    "Avaliação e indicação automática",
+    "Suporte prioritário via WhatsApp",
+  ];
+  return (
+    <div className="min-h-screen bg-background">
+      {/* Fixed Header */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
+        <div className="container mx-auto px-4 py-3">
+          <div className="flex items-center justify-between gap-2">
+            <img src={logoClara} alt="Clara - Assistente Digital" className="h-24 w-auto" />
+            <div className="flex items-center gap-2 sm:gap-4">
+              <Link to="/editar-preferencias">
+                <Button variant="outline" size="lg" className="text-xs sm:text-sm whitespace-nowrap px-3 sm:px-6">
+                  Editar preferências
+                </Button>
+              </Link>
+              <Button variant="hero" size="lg" className="text-xs sm:text-sm whitespace-nowrap px-3 sm:px-8"
+                onClick={() => document.getElementById('cadastro')?.scrollIntoView({ behavior: 'smooth' })}>
+                Assinar agora
+              </Button>
+            </div>
+          </div>
+        </div>
+      </header>
+      {/* Hero Section */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-primary/10 via-background to-accent/10 pt-32 pb-32">
+        <div className="container mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="animate-fade-in">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary mb-6">
+                <Sparkles className="w-4 h-4" />
+                <span className="text-sm font-medium">Sua assistente digital por WhatsApp</span>
+              </div>
+              <h1 className="text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                Organize seus clientes com a Clara
+              </h1>
+              <p className="text-xl text-muted-foreground mb-4">
+                A Clara é sua secretária digital no WhatsApp: agenda compromissos, envia lembretes e organiza suas cobranças.
+              </p>
+              <p className="text-2xl font-bold text-primary mb-8">
+                Por apenas R$35/mês
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button variant="hero" size="lg"
+                  onClick={() => document.getElementById('cadastro')?.scrollIntoView({ behavior: 'smooth' })}>
+                  Assinar agora <ArrowRight className="ml-2" />
+                </Button>
+                <Button variant="outline" size="lg"
+                  onClick={() => document.getElementById('precos')?.scrollIntoView({ behavior: 'smooth' })}>
+                  Ver detalhes do plano
+                </Button>
+              </div>
+            </div>
+            <div className="animate-fade-in-delayed relative overflow-hidden rounded-2xl shadow-elegant shadow-2xl group cursor-pointer"
+              style={{ boxShadow: '0 20px 60px -15px hsl(186 28% 50% / 0.4), 0 10px 30px -10px hsl(186 28% 50% / 0.3)' }}
+              onMouseEnter={handleMouseEnter} onClick={handlePlayClick}>
+              <video ref={videoRef} muted={isMuted} loop playsInline className="w-full h-full object-cover rounded-2xl">
+                <source src={videoLanding} type="video/mp4" />
+              </video>
+              {!isPlaying && (
+                <div className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-[2px] rounded-2xl transition-opacity">
+                  <div className="w-20 h-20 rounded-full bg-white/90 flex items-center justify-center shadow-lg hover:bg-white hover:scale-110 transition-all">
+                    <div className="w-0 h-0 border-t-[12px] border-t-transparent border-l-[20px] border-l-primary border-b-[12px] border-b-transparent ml-1"></div>
+                  </div>
+                </div>
+              )}
+              {isPlaying && (
+                <button onClick={handleSoundToggle}
+                  className="absolute bottom-4 right-4 w-10 h-10 rounded-full bg-black/50 hover:bg-black/70 flex items-center justify-center transition-all backdrop-blur-sm"
+                  aria-label={isMuted ? "Unmute video" : "Mute video"}>
+                  {isMuted ? <VolumeX className="w-5 h-5 text-white" /> : <Volume2 className="w-5 h-5 text-white" />}
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* Features Section */}
+      <section id="funcionalidades" className="py-24 bg-[#E8F4F2]">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4 text-[#4A9B8E]">Funcionalidades da Clara</h2>
+            <p className="text-xl text-muted-foreground">Tudo que você precisa para gerenciar seus clientes</p>
+          </div>
+          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {features.map((feature, index) => (
+              <Card key={index} className="border-0 shadow-card hover:shadow-elegant transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-card to-secondary/20">
+                <CardContent className="p-6">
+                  <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center mb-4">
+                    <feature.icon className="w-6 h-6 text-primary-foreground" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+                  <p className="text-muted-foreground">{feature.description}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          <div className="md:hidden">
+            <Carousel className="w-full">
+              <CarouselContent className="-ml-4">
+                {features.map((feature, index) => (
+                  <CarouselItem key={index} className="pl-4 basis-[85%]">
+                    <Card className="border-0 shadow-card bg-gradient-to-br from-card to-secondary/20 h-full">
+                      <CardContent className="p-6">
+                        <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center mb-4">
+                          <feature.icon className="w-6 h-6 text-primary-foreground" />
+                        </div>
+                        <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+                        <p className="text-muted-foreground">{feature.description}</p>
+                      </CardContent>
+                    </Card>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="hidden" />
+              <CarouselNext className="hidden" />
+            </Carousel>
+          </div>
+        </div>
+      </section>
+      {/* Pricing Section */}
+      <section id="precos" className="py-24">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4">Plano simples e acessível</h2>
+            <p className="text-xl text-muted-foreground">Tudo incluso por um preço que cabe no seu bolso</p>
+          </div>
+          <div className="max-w-md mx-auto">
+            <Card className="border-2 border-primary shadow-elegant relative overflow-hidden">
+              <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-primary to-accent text-primary-foreground text-center py-2 text-sm font-semibold">
+                Plano Completo
+              </div>
+              <CardContent className="p-8 pt-14">
+                <div className="text-center mb-8">
+                  <div className="flex items-baseline justify-center gap-1">
+                    <span className="text-lg text-muted-foreground">R$</span>
+                    <span className="text-6xl font-bold text-foreground">35</span>
+                    <span className="text-lg text-muted-foreground">/mês</span>
+                  </div>
+                  <p className="text-muted-foreground mt-2">Cancele quando quiser</p>
+                </div>
+                <ul className="space-y-3 mb-8">
+                  {planBenefits.map((benefit, index) => (
+                    <li key={index} className="flex items-center gap-3">
+                      <Check className="w-5 h-5 text-primary flex-shrink-0" />
+                      <span className="text-foreground">{benefit}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Button variant="hero" size="lg" className="w-full"
+                  onClick={() => document.getElementById('cadastro')?.scrollIntoView({ behavior: 'smooth' })}>
+                  Assinar agora <ArrowRight className="ml-2" />
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+      {/* Testimonials Section */}
+      <section className="py-24 bg-secondary/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4">O que nossos usuários dizem</h2>
+            <p className="text-xl text-muted-foreground">Mais tempo para o que realmente importa!</p>
+          </div>
+          <div className="md:hidden">
+            <Carousel className="w-full max-w-sm mx-auto">
+              <CarouselContent>
+                {testimonials.map((testimonial, index) => (
+                  <CarouselItem key={index}>
+                    <Card className="border-0 shadow-card bg-card">
+                      <CardContent className="p-6">
+                        <div className="flex items-center gap-1 mb-4 text-accent">
+                          {[...Array(5)].map((_, i) => (<Sparkles key={i} className="w-4 h-4 fill-current" />))}
+                        </div>
+                        <p className="text-muted-foreground mb-4">"{testimonial.content}"</p>
+                        <div>
+                          <p className="font-semibold">{testimonial.name}</p>
+                          <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="left-0" />
+              <CarouselNext className="right-0" />
+            </Carousel>
+          </div>
+          <div className="hidden md:grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {testimonials.map((testimonial, index) => (
+              <Card key={index} className="border-0 shadow-card bg-card">
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-1 mb-4 text-accent">
+                    {[...Array(5)].map((_, i) => (<Sparkles key={i} className="w-4 h-4 fill-current" />))}
+                  </div>
+                  <p className="text-muted-foreground mb-4">"{testimonial.content}"</p>
+                  <div>
+                    <p className="font-semibold">{testimonial.name}</p>
+                    <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+      {/* FAQ Section */}
+      <section className="py-24">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4">Perguntas Frequentes</h2>
+            <p className="text-xl text-muted-foreground">Tire suas dúvidas sobre a Clara</p>
+          </div>
+          <div className="max-w-3xl mx-auto">
+            <Accordion type="single" collapsible className="space-y-4">
+              {[
+                { q: "A Clara é um aplicativo?", a: "Não! A Clara funciona direto no WhatsApp, sem precisar baixar nada." },
+                { q: "Como a Clara ajuda no meu dia a dia?", a: "Ela cuida das tarefas repetitivas: confirma presença, envia lembretes, faz cobranças e até reativa clientes antigos." },
+                { q: "Preciso saber mexer em tecnologia?", a: "De forma alguma. Tudo é feito por conversa — simples e natural, como falar com uma secretária de verdade." },
+                { q: "A Clara pode falar com meus clientes automaticamente?", a: "Sim. Ela envia mensagens personalizadas no momento certo: antes do atendimento, após o pagamento e quando o cliente está sumido." },
+                { q: "Quanto custa usar a Clara?", a: "R$35 por mês com todas as funcionalidades inclusas. Cancele quando quiser, sem multa." },
+                { q: "E se eu quiser parar de usar?", a: "Você pode cancelar a qualquer momento, sem contratos ou multa." },
+              ].map((item, index) => (
+                <AccordionItem key={index} value={`item-${index}`} className="border rounded-lg px-6 bg-card">
+                  <AccordionTrigger className="text-left">{item.q}</AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground">{item.a}</AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+        </div>
+      </section>
+      {/* CTA Section with Form */}
+      <section id="cadastro" className="py-24 bg-gradient-to-br from-primary/10 via-background to-accent/10">
+        <div className="container mx-auto px-4">
+          <div className="max-w-2xl mx-auto text-center">
+            <h2 className="text-4xl font-bold mb-4">Assine a Clara por R$35/mês</h2>
+            <p className="text-xl text-muted-foreground mb-8">
+              Preencha seus dados e seja redirecionado para o pagamento seguro
+            </p>
+            <RegistrationFormPaid />
+          </div>
+        </div>
+      </section>
+      {/* Footer */}
+      <footer className="py-12 border-t bg-card">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-4 gap-8">
+            <div>
+              <h3 className="font-bold text-xl mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Clara</h3>
+              <p className="text-muted-foreground text-sm">Sua secretária digital por WhatsApp</p>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">Produto</h4>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li><a href="#funcionalidades" className="hover:text-primary transition-colors">Funcionalidades</a></li>
+                <li><a href="#precos" className="hover:text-primary transition-colors">Preços</a></li>
+                <li><Link to="/editar-preferencias" className="hover:text-primary transition-colors">Editar preferências</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">Empresa</h4>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li><a href="#" className="hover:text-primary transition-colors">Sobre</a></li>
+                <li><a href="#" className="hover:text-primary transition-colors">Blog</a></li>
+                <li><a href="#" className="hover:text-primary transition-colors">Contato</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">Legal</h4>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li><a href="#" className="hover:text-primary transition-colors">Privacidade</a></li>
+                <li><a href="#" className="hover:text-primary transition-colors">Termos</a></li>
+                <li><a href="#" className="hover:text-primary transition-colors">Cookies</a></li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t mt-8 pt-8 text-center text-sm text-muted-foreground">
+            <p>© 2026 Clara. Todos os direitos reservados.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+};
+export default IndexPaid;

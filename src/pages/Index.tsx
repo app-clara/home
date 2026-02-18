@@ -506,7 +506,6 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      {/* Footer */}
       <footer className="py-12 border-t bg-card">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-8">
