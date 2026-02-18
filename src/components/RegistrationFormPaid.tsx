@@ -32,14 +32,36 @@ const commonTimes = [
   { value: "120", label: "2 horas" },
 ];
 const formSchema = z.object({
-  full_name: z.string().trim().min(2, { message: "Nome completo deve ter pelo menos 2 caracteres" }).max(100),
-  email: z.string().trim().email({ message: "Email inválido" }).max(255),
-  phone_number: z.string().trim().min(1, { message: "Telefone é obrigatório" }).regex(/^\d{11}$/, { message: "Telefone deve ter exatamente 11 dígitos" }),
-  business_name: z.string().trim().min(2, { message: "Nome do negócio deve ter pelo menos 2 caracteres" }).max(100),
-  business_sector: z.string().trim().min(1, { message: "Setor de atuação é obrigatório" }).max(100),
-  business_description: z.string().trim().max(500).optional(),
-  number_of_employees: z.string().trim().min(1, { message: "Número de funcionários é obrigatório" }).regex(/^\d+$/, { message: "Digite apenas números" }),
-  attendance_time: z.string().min(1, { message: "Tempo de atendimento é obrigatório" }),
+  full_name: z.string()
+    .trim()
+    .min(2, { message: "Nome completo deve ter pelo menos 2 caracteres" })
+    .max(100, { message: "Nome completo deve ter no máximo 100 caracteres" }),
+  email: z.string()
+    .trim()
+    .email({ message: "Email inválido" })
+    .max(255, { message: "Email deve ter no máximo 255 caracteres" }),
+  phone_number: z.string()
+    .trim()
+    .min(1, { message: "Telefone é obrigatório" })
+    .regex(/^\d{11}$/, { message: "Telefone deve ter exatamente 11 dígitos" }),
+  business_name: z.string()
+    .trim()
+    .min(2, { message: "Nome do negócio deve ter pelo menos 2 caracteres" })
+    .max(100, { message: "Nome do negócio deve ter no máximo 100 caracteres" }),
+  business_sector: z.string()
+    .trim()
+    .min(1, { message: "Setor de atuação é obrigatório" })
+    .max(100, { message: "Setor deve ter no máximo 100 caracteres" }),
+  business_description: z.string()
+    .trim()
+    .max(500, { message: "Descrição deve ter no máximo 500 caracteres" })
+    .optional(),
+  number_of_employees: z.string()
+    .trim()
+    .min(1, { message: "Número de funcionários é obrigatório" })
+    .regex(/^\d+$/, { message: "Digite apenas números" }),
+  attendance_time: z.string()
+    .min(1, { message: "Tempo de atendimento é obrigatório" }),
 });
 type FormData = z.infer<typeof formSchema>;
 export const RegistrationFormPaid = () => {
@@ -122,7 +144,7 @@ export const RegistrationFormPaid = () => {
             <FormField control={form.control} name="phone_number" render={({ field }) => (
               <FormItem>
                 <FormLabel>Telefone (WhatsApp) *</FormLabel>
-                <FormControl><Input placeholder="+5511999999999" {...field} /></FormControl>
+                <FormControl><Input placeholder="11999999999" {...field} /></FormControl>
                 <FormMessage />
               </FormItem>
             )} />
