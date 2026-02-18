@@ -65,7 +65,7 @@ const editFormSchema = z.object({
   phone_number: z.string()
     .trim()
     .min(1, { message: "Telefone é obrigatório" })
-    .regex(/^\d{11}$/, { message: "Telefone deve ter exatamente 11 dígitos" }),
+    .regex(/^\d{13}$/, { message: "Telefone deve ter exatamente 13 dígitos" }),
   business_name: z.string()
     .trim()
     .min(2, { message: "Nome do negócio deve ter pelo menos 2 caracteres" })
@@ -97,6 +97,7 @@ const EditPreferences = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [userEmail, setUserEmail] = useState("");
+  const [userToken, setUserToken] = useState("");
 
   const emailForm = useForm<EmailData>({
     resolver: zodResolver(emailSchema),
@@ -128,7 +129,7 @@ const EditPreferences = () => {
     setIsLoading(true);
     try {
       // Call endpoint to send reset token
-      const response = await fetch('https://your-endpoint.com/send-token', {
+      const response = await fetch('https://southamerica-east1-youtube-api-atomus.cloudfunctions.net/claraleads-editpreferences/send_reset_password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: data.email }),
@@ -137,7 +138,6 @@ const EditPreferences = () => {
       if (response.ok) {
         setUserEmail(data.email);
         toast.success("Token enviado para seu email!");
-        setStep(2);
       } else {
         toast.error("Erro ao enviar token. Tente novamente.");
       }
@@ -153,7 +153,7 @@ const EditPreferences = () => {
     setIsLoading(true);
     try {
       // Call endpoint to verify token
-      const response = await fetch('https://your-endpoint.com/verify-token', {
+      const response = await fetch('https://southamerica-east1-youtube-api-atomus.cloudfunctions.net/claraleads-editpreferences/verify_token', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: userEmail, token: data.token }),
@@ -175,6 +175,9 @@ const EditPreferences = () => {
           integrate_google_calendar: userData.integrate_google_calendar || true,
         });
         toast.success("Token verificado com sucesso!");
+        // Redirect to edit form after populating data
+        setUserToken(data.token);
+        setStep(2);
       } else {
         toast.error("Token inválido. Tente novamente.");
       }
@@ -191,14 +194,15 @@ const EditPreferences = () => {
     try {
       const updateData = {
         ...data,
+        email_verify: userEmail,
+        token: userToken,
         number_of_employees: data.number_of_employees ? parseInt(data.number_of_employees) : null,
-        updated_at: new Date().toISOString(),
       };
 
       const jsonData = JSON.stringify(updateData, null, 2);
       console.log("Update data (JSON):", jsonData);
 
-      const response = await fetch('https://your-endpoint.com/update-preferences', {
+      const response = await fetch('https://southamerica-east1-youtube-api-atomus.cloudfunctions.net/claraleads-editpreferences/submit_form', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: jsonData,
