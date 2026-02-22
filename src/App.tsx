@@ -17,8 +17,8 @@ const App = () => (
       <Sonner />
       <HashRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/assinar" element={<IndexPaid />} />
+          <Route path="/free" element={<Index />} />
+          <Route path="/" element={<IndexPaid />} />
           <Route path="/editar-preferencias" element={<EditPreferences />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

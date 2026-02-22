@@ -22,7 +22,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { toast } from "sonner";
 import { Loader2, CheckCircle } from "lucide-react";
-const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/test_bJe28t7eD69g63l8hi73G01";
+const STRIPE_PAYMENT_LINK = "https://buy.stripe.com/6oU9AT4pJ4az9b42QLg3600";
 const commonTimes = [
   { value: "15", label: "15 minutos" },
   { value: "30", label: "30 minutos" },
@@ -89,6 +89,7 @@ export const RegistrationFormPaid = () => {
         flg_onboarding: false,
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),
+        user_type: "PAID",
       };
       const jsonData = JSON.stringify(registrationData, null, 2);
       console.log("Registration data (JSON):", jsonData);
