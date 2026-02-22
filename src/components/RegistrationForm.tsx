@@ -97,6 +97,7 @@ export const RegistrationForm = () => {
         flg_onboarding: false,
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),
+        user_type: "FREE",
       };
 
       // Serialize to JSON
