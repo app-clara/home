@@ -201,7 +201,7 @@ export const RegistrationFormPaid = () => {
               {isLoading ? (
                 <><Loader2 className="h-4 w-4 animate-spin" />Enviando...</>
               ) : (
-                "Assinar por R$35/mês"
+                "Assinar por R$50/mês"
               )}
             </Button>
             <p className="text-sm text-muted-foreground">
