@@ -138,7 +138,7 @@ const IndexPaid = () => {
                 A Clara é sua secretária digital no WhatsApp: agenda compromissos, envia lembretes e organiza suas cobranças.
               </p>
               <p className="text-2xl font-bold text-primary mb-8">
-                Por apenas R$35/mês
+                Por apenas R$50/mês
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button variant="hero" size="lg"
@@ -234,7 +234,7 @@ const IndexPaid = () => {
                 <div className="text-center mb-8">
                   <div className="flex items-baseline justify-center gap-1">
                     <span className="text-lg text-muted-foreground">R$</span>
-                    <span className="text-6xl font-bold text-foreground">35</span>
+                    <span className="text-6xl font-bold text-foreground">50</span>
                     <span className="text-lg text-muted-foreground">/mês</span>
                   </div>
                   <p className="text-muted-foreground mt-2">Cancele quando quiser</p>
@@ -319,7 +319,7 @@ const IndexPaid = () => {
                 { q: "Como a Clara ajuda no meu dia a dia?", a: "Ela cuida das tarefas repetitivas: confirma presença, envia lembretes, faz cobranças e até reativa clientes antigos." },
                 { q: "Preciso saber mexer em tecnologia?", a: "De forma alguma. Tudo é feito por conversa — simples e natural, como falar com uma secretária de verdade." },
                 { q: "A Clara pode falar com meus clientes automaticamente?", a: "Sim. Ela envia mensagens personalizadas no momento certo: antes do atendimento, após o pagamento e quando o cliente está sumido." },
-                { q: "Quanto custa usar a Clara?", a: "R$35 por mês com todas as funcionalidades inclusas. Cancele quando quiser, sem multa." },
+                { q: "Quanto custa usar a Clara?", a: "R$50 por mês com todas as funcionalidades inclusas. Cancele quando quiser, sem multa." },
                 { q: "E se eu quiser parar de usar?", a: "Você pode cancelar a qualquer momento, sem contratos ou multa." },
               ].map((item, index) => (
                 <AccordionItem key={index} value={`item-${index}`} className="border rounded-lg px-6 bg-card">
@@ -335,7 +335,7 @@ const IndexPaid = () => {
       <section id="cadastro" className="py-24 bg-gradient-to-br from-primary/10 via-background to-accent/10">
         <div className="container mx-auto px-4">
           <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-4xl font-bold mb-4">Assine a Clara por R$35/mês</h2>
+            <h2 className="text-4xl font-bold mb-4">Assine a Clara por R$50/mês</h2>
             <p className="text-xl text-muted-foreground mb-8">
               Preencha seus dados e seja redirecionado para o pagamento seguro
             </p>
